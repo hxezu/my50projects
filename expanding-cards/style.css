@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;           /*padding 과 border 가 width와 height 에 포함*/
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  display: flex;                    /* 요소들을 중앙정렬*/
+  align-items: center;             
+  justify-content: center;
+  height: 100vh;                    /*화면 전체 높이 viewport height*/
+  overflow: hidden;
+  margin: 0;  
+}
+
+.container{
+  display: flex;                     /*내부 요소를 가로정렬*/
+  width: 90vw;                       /*전체 화면의 90% 너비*/
+}
+
+.panel{
+  background-size: cover;             /*배경 이미지를 꽉 채움*/
+  background-position: center;        /*중앙 정렬*/
+  background-repeat: no-repeat;      
+  height: 80vh;
+  border-radius: 50px;                /*모서리 둥글게*/
+  color: #fff;
+  cursor: pointer;                    /*마우스 커서를 손가락 모양으로*/
+  flex: 0.5;                          /**/
+  margin: 10px;
+  position: relative;
+  -webkit-transition: all 700ms ease-in;  /*부드러운 애니매이션*/
+}
+
+.panel h3{
+  font-size: 24px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  margin: 0;
+  opacity: 0;
+}
+
+.panel.active{
+  flex: 5;                              /*0.5 였던 패널이 5배로 확장*/
+}
+
+.panel.active h3{
+  opacity: 1;
+  transition: opacity 0.3s ease-in 0.4s;    /*0.4초 뒤 서서히 등장*/
+}
+
+@media (max-width: 480px){
+  .container{
+    width: 100vw;
+  }
+  .panel:nth-of-type(4),                /*작아졌을때 4,5번째 이미지 숨김*/
+  .panel:nth-of-type(5){
+    display: none;
+  }
+}
