@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+:root{
+  --line-border-fill: #3498db;
+  --line-border-empty: #e0e0e0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f1f1f1;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.container{
+  text-align: center;
+}
+
+/*선과 동그라미들*/
+.progress-container{
+  display: flex;
+  justify-content: space-between;         /*동그라미들을 양끝으로 정렬*/
+  position: relative;
+  margin-bottom: 30px;
+  max-width: 100%;
+  width: 350px;
+}
+
+/* 요소 앞에 회색배경 추가 즉, 회색선이 배경처럼 표시되고 파란색 진행 바는 이 위에 겹쳐서 표시됨
+    ex: 버튼 앞에 아이콘 추가, 배경효과 추가 등 */
+.progress-container::before{
+  content: '';
+  background-color: var(--line-border-empty);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);  /* top:50% 와 같이 쓰면 세로 중앙 정렬 의미*/
+  height: 4px;
+  width: 100%;
+  z-index: -1;                   /*뒤쪽으로 배치*/
+}
+
+/*선*/
+.progress{
+  background-color: var(--line-border-fill);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);           /*자신의 높이의 50% 만큼 위로 이동*/
+  height: 4px;
+  width: 0%;
+  z-index: -1;
+  transition: 0.4s ease;
+}
+
+.circle{
+  background-color: #f1f1f1;
+  color: #999;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: flex;                        /*이줄포함 아래로 3줄: 내부 숫자 가운데 정렬*/
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--line-border-empty);
+  transition: 0.4s ease;                 /*부드럽게 색상 변경*/
+}
+
+.circle.active{
+  border-color: var(--line-border-fill);
+}
+
+.btn{
+  background-color: var(--line-border-fill);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 8px 30px;
+  margin: 5px;
+  font-size: 14px;
+}
+
+.btn:active{
+  transform:scale(0.98);          /*버튼이 클릭될때 살짝 줄어드는 효과*/
+}
+
+.btn:focus{
+  outline: 0;
+}
+
+.btn:disabled{
+  background-color: var(--line-border-empty);
+  cursor: not-allowed;                        /*클릭 불가능*/
+}
