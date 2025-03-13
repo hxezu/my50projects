@@ -42,6 +42,7 @@ body {
   background-size: cover;
 }
 
+/*요소 위에 가상 요소 추가*/
 .split.left::before{
   content: '';
   position: absolute;
@@ -71,8 +72,8 @@ h1{
   position: absolute;
   left: 50%;
   top: 20%;
-  transform: translateX(-50%);
-  white-space: nowrap;
+  transform: translateX(-50%);              /*자신의 너비의 50%만큼 왼쪽으로 이동*/
+  white-space: nowrap;                      /*줄바꿈 하지 않음*/
 }
 
 .btn{
@@ -105,7 +106,7 @@ h1{
 
 .split.right,.split.left,
 .split.left::before,.split.right::before{
-  transition: all var(--speed) ease-in-out;
+  transition: all var(--speed) ease-in-out;         /*속성이 변경될 때 부드러운 전환 효과를 적용*/
 }
 
 .hover-left .left{width: var(--hover-width);}
