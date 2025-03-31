@@ -12,24 +12,29 @@ body {
   margin: 0;
 }
 
-input:focus{outline: none;}
+textarea:focus{outline: none;}
 ul{margin: 0; padding: 0;}
 li {list-style: none; }
 a{text-decoration: none;}
 a:focus {outline: none}
+a:visited {color: inherit;}
 button:focus {outline: none}
+textarea{resize: none;}
 
 .wrap{width: 100vw; height: 100vh; display: flex;}
-.left-wrapper{width: 20%; display: flex; flex-direction: column; padding: 2rem; background: #e8e8e8;}
-.left-wrapper .left-header {display: flex; justify-content: space-between; align-items: center;}
-.left-wrapper .left-header span{font-size: 2rem; font-weight: bolder;}
+.left-wrapper{width: 20%; display: flex; flex-direction: column; padding: 2rem; background: #e8e8e8; overflow: hidden;}
+.left-wrapper .left-header {width: 100%; display: flex; justify-content: space-between; align-items: center;}
+.left-wrapper .left-header span{font-size: 2vw; font-weight: bolder;}
+.left-wrapper .left-header i{cursor: pointer;}
 .left-wrapper #notionList{margin-top: 15%;}
-.left-wrapper #notionList li{margin-bottom: 10px; cursor: pointer;}
+.left-wrapper #notionList li{margin-bottom: 10px; padding:4px; cursor: pointer; color: #6a6a6a; box-sizing: border-box; border-radius: 5px;}
+.left-wrapper #notionList li:hover{background-color: #cbcbcb; color: black;}
 .left-wrapper #notionList li i{margin-right: 8px;}
-.left-wrapper #notionList li a{ color: black;}
 
 .right-wrapper{width: 80%; display: flex; flex-direction: column}
-.right-wrapper .right-header{height: 10%; padding: 1rem; box-sizing: border-box;}
-.right-wrapper .right-content{display: flex; flex-direction: column;}
-.right-wrapper .right-content #contentTitle{ padding : 5rem ;font-size: 2.5rem; border: none;} 
-.right-wrapper .right-content #contentBody{padding: 0 5rem; border: none; font-size: 1.2rem;}
+.right-wrapper .right-header{height: 10%; padding: 1rem; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center;}
+.right-wrapper .right-header .button-wrapper i{cursor: pointer; margin-right: 20px;}
+.right-wrapper .right-header .button-wrapper #historyBackButton{transform: scaleX(-1);}
+.right-wrapper .right-content{display: flex; flex-direction: column; height: 90%;}
+.right-wrapper .right-content #contentTitle{ padding : 4rem ;font-size: 2.5rem; border: none; height: 20%;} 
+.right-wrapper .right-content #contentBody{padding: 2rem 5rem; border: none; font-size: 1.2rem; height: 80%;}

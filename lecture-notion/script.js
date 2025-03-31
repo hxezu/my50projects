@@ -55,8 +55,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     const contentBody = document.getElementById('contentBody')
     const setContents = (data)=>{
         pageId.textContent = data['id']
-        contentTitle.textContent = data['title']
-        contentBody.textContent = data['body']
+        contentTitle.value = data['title']
+        contentBody.value = data['body']
+
+        history.back = []
+        history.forward = []
     }
 
     contentTitle.addEventListener('keydown',(e)=>{
@@ -65,22 +68,55 @@ document.addEventListener('DOMContentLoaded',()=>{
         }
     })
 
-    const pageSaveButton =document.getElementById('historyBackButton');
+    const pageSaveButton =document.getElementById('pageSaveButton');
     pageSaveButton.addEventListener('click',(e)=>{
+        
         if(confirm('저장하시겠습니까?')){
-            fetch('http://localhost:3000/posts'+pageId.textContent, {
+            fetch('http://localhost:3000/posts/'+pageId.textContent, {
                 method: 'PUT',
                 body: JSON.stringify({
-                  title : contentTitle.innerHTML,
-                  body : contentBody.innerHTML
+                  title : contentTitle.value,
+                  body : contentBody.value
                 }),
                 headers: {
                   'Content-type': 'application/json; charset=UTF-8',
                 },
               })
                 .then((response) => response.json())
-                .then((json) => console.log(json));
+                .then((json) => {
+                    notionList.querySelector("a[id='"+pageId.textContent+"']").textContent = contentTitle.value
+                    alert('저장되었습니다')
+                });     
         }
     })
-    
+    const history={
+        'back' :[],
+        'forward':[]
+    }
+    contentBody.addEventListener('keydown',(event)=>{
+        if(event.keyCode==13){
+            if(history.forward.length > 0){
+                history.forward  = []
+            }
+            history.back.push(event.currentTarget.value)
+        }
+    })
+
+    const historyBackBtn = document.getElementById('historyBackButton')
+    historyBackBtn.addEventListener('click', (e)=>{
+        if(history.back.length ==0){
+            return;
+        }
+        history.forward.push(contentBody.value)
+        contentBody.value = history.back.pop()
+    })
+
+    const historyForwardBtn = document.getElementById('historyForwardButton')
+    historyForwardBtn.addEventListener('click',(e)=>{
+        if(history.forward.length ==0){
+            return;
+        }
+        history.back.push(contentBody.value)
+        contentBody.value = history.forward.pop()
+    })
 })

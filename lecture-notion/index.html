@@ -20,16 +20,17 @@
 
       <div class="right-wrapper">
         <div class="right-header">
-          <button type="button" id="pageSaveButton">저장</button>
-          <button type="button" id="historyBackButton">내용 history 저장</button>
-          <button type="button" id="historyForwardButton">내용 history forward</button>
-          
           <div>pageID : <span id="pageId"></span></div>
+          <div class="button-wrapper">
+            <i class="fa-solid fa-share" id="historyBackButton"></i>
+            <i class="fa-solid fa-share" id="historyForwardButton"></i>
+            <i class="fa-regular fa-floppy-disk" id="pageSaveButton"></i>
+          </div>
         </div>
         
         <div class="right-content">
-          <input id="contentTitle" contenteditable="true" placeholder="새페이지 제목"></input>
-          <input id="contentBody" contenteditable="true" placeholder="새페이지 내용"></input>
+          <textarea id="contentTitle" type="text" placeholder="새페이지 제목"></textarea>
+          <textarea id="contentBody" type="text" placeholder="새페이지 내용"></textarea>
         </div>
         
       </div>
