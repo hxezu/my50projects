@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>35. My Notion</title>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class='left-wrapper'>
+        <div>
+          <div class="left-header">
+            <span>Notion</span>
+            <i class="fa-solid fa-plus" id="pageCreateButton"></i>
+          </div>
+          <ul id="notionList"></ul>
+        </div>
+      </div>
+
+      <div class="right-wrapper">
+        <div class="right-header">
+          <button type="button" id="pageSaveButton">저장</button>
+          <button type="button" id="historyBackButton">내용 history 저장</button>
+          <button type="button" id="historyForwardButton">내용 history forward</button>
+          
+          <div>pageID : <span id="pageId"></span></div>
+        </div>
+        
+        <div class="right-content">
+          <input id="contentTitle" contenteditable="true" placeholder="새페이지 제목"></input>
+          <input id="contentBody" contenteditable="true" placeholder="새페이지 내용"></input>
+        </div>
+        
+      </div>
+    </div>
+    
+    <script src="https://kit.fontawesome.com/fb1f3be790.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

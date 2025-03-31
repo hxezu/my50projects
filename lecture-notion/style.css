@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+input:focus{outline: none;}
+ul{margin: 0; padding: 0;}
+li {list-style: none; }
+a{text-decoration: none;}
+a:focus {outline: none}
+button:focus {outline: none}
+
+.wrap{width: 100vw; height: 100vh; display: flex;}
+.left-wrapper{width: 20%; display: flex; flex-direction: column; padding: 2rem; background: #e8e8e8;}
+.left-wrapper .left-header {display: flex; justify-content: space-between; align-items: center;}
+.left-wrapper .left-header span{font-size: 2rem; font-weight: bolder;}
+.left-wrapper #notionList{margin-top: 15%;}
+.left-wrapper #notionList li{margin-bottom: 10px; cursor: pointer;}
+.left-wrapper #notionList li i{margin-right: 8px;}
+.left-wrapper #notionList li a{ color: black;}
+
+.right-wrapper{width: 80%; display: flex; flex-direction: column}
+.right-wrapper .right-header{height: 10%; padding: 1rem; box-sizing: border-box;}
+.right-wrapper .right-content{display: flex; flex-direction: column;}
+.right-wrapper .right-content #contentTitle{ padding : 5rem ;font-size: 2.5rem; border: none;} 
+.right-wrapper .right-content #contentBody{padding: 0 5rem; border: none; font-size: 1.2rem;}
