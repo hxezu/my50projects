@@ -36,5 +36,5 @@ textarea{resize: none;}
 .right-wrapper .right-header .button-wrapper i{cursor: pointer; margin-right: 20px;}
 .right-wrapper .right-header .button-wrapper #historyBackButton{transform: scaleX(-1);}
 .right-wrapper .right-content{display: flex; flex-direction: column; height: 90%;}
-.right-wrapper .right-content #contentTitle{ padding : 4rem ;font-size: 2.5rem; border: none; height: 20%;} 
-.right-wrapper .right-content #contentBody{padding: 2rem 5rem; border: none; font-size: 1.2rem; height: 80%;}
+.right-wrapper .right-content #contentTitle{ padding : 2rem 5rem ;font-size: 2.5rem; border: none; height: 20%;} 
+.right-wrapper .right-content #contentBody{padding: 0 5rem; border: none; font-size: 1.2rem; height: 80%;}
