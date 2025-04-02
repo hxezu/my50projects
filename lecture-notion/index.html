@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="wrap">
-      <div class='left-wrapper'>
+      <div class="left-wrapper">
         <div>
           <div class="left-header">
             <span>Notion</span>
@@ -27,16 +27,24 @@
             <i class="fa-regular fa-floppy-disk" id="pageSaveButton"></i>
           </div>
         </div>
-        
+
         <div class="right-content">
-          <textarea id="contentTitle" type="text" placeholder="새페이지 제목"></textarea>
-          <textarea id="contentBody" type="text" placeholder="새페이지 내용"></textarea>
+          <input id="contentTitle" type="text" placeholder="새 페이지 제목" />
+          <div id="contentContainer">
+            <div
+              class="contentBlock"
+              contenteditable="true"
+              placeholder="새 페이지 내용"
+            ></div>
+          </div>
         </div>
-        
       </div>
     </div>
-    
-    <script src="https://kit.fontawesome.com/fb1f3be790.js" crossorigin="anonymous"></script>
+
+    <script
+      src="https://kit.fontawesome.com/fb1f3be790.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
   </body>
 </html>
