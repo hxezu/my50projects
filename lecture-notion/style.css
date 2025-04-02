@@ -42,6 +42,10 @@ textarea {
   resize: none;
 }
 
+i {
+  cursor: pointer;
+}
+
 .wrap {
   width: 100vw;
   height: 100vh;
@@ -50,7 +54,9 @@ textarea {
 
 /* 왼쪽 패널 */
 .left-wrapper {
-  flex-basis: 250px;
+  position: relative;
+  width: 20%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 2rem;
@@ -69,17 +75,29 @@ textarea {
   font-weight: bold;
 }
 
-.left-header #pageCreateButton {
+.fa-plus {
   cursor: pointer;
   font-size: 1.2rem;
 }
 
-#notionList {
+.pageList-wrapper {
+  width: 100%;
   margin-top: 1rem;
+  height: 40vh;
+}
+
+.pageList-wrapper .pageList-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#notionList {
+  margin-top: 10px;
 }
 
 #notionList li {
-  margin-bottom: 10px;
+  margin-bottom: 2px;
   padding: 8px;
   cursor: pointer;
   color: #6a6a6a;
@@ -96,9 +114,58 @@ textarea {
   margin-right: 8px;
 }
 
+.todoList-wrapper {
+  height: 40vh;
+}
+
+.todoList-header {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#todoList {
+  height: 90%;
+  margin-top: 10px;
+  overflow: scroll;
+}
+
+#todoList li {
+  margin-bottom: 2px;
+  padding: 8px;
+  color: #6a6a6a;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+#todoList li:hover {
+  background-color: #cbcbcb;
+  color: black;
+}
+
+#todoList li span {
+  margin-left: 10px;
+}
+
+.left-footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 20px 0;
+}
+
+.left-footer #deletePageBtn {
+  cursor: pointer;
+  display: block;
+  text-align: end;
+  margin-right: 30px;
+}
+
 /* 오른쪽 패널 */
 .right-wrapper {
-  flex-grow: 1;
+  width: 80%;
   display: flex;
   flex-direction: column;
   overflow: hidden;

@@ -1,12 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   const pageCreateBtn = document.getElementById("pageCreateButton");
   const notionList = document.getElementById("notionList");
+  const todoList = document.getElementById("todoList");
   const pageId = document.getElementById("pageId");
   const contentTitle = document.getElementById("contentTitle");
   const contentContainer = document.getElementById("contentContainer");
   const pageSaveButton = document.getElementById("pageSaveButton");
   const historyBackBtn = document.getElementById("historyBackButton");
   const historyForwardBtn = document.getElementById("historyForwardButton");
+  const pageDeleteButton = document.getElementById("deletePageBtn");
+  const todoCreateBtn = document.getElementById("todoCreateButton");
 
   let history = { back: [], forward: [] };
 
@@ -92,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       contentContainer.insertBefore(newBlock, e.target.nextSibling);
       newBlock.focus();
     } else if (e.key === "Backspace" && e.target.textContent === "") {
+      e.preventDefault();
       removeBlock(e.target);
     }
   };
@@ -181,5 +185,129 @@ document.addEventListener("DOMContentLoaded", () => {
     content.split("\n").forEach((text) => {
       contentContainer.appendChild(createBlock(text));
     });
+  };
+
+  pageDeleteButton.addEventListener("click", () => {
+    if (confirm("페이지를 삭제하시겠습니까?")) {
+      fetch(`http://localhost:3000/posts/${pageId.textContent}`, {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (!response.ok) throw new Error("Delete Failed");
+          return response.json();
+        })
+        .then(() => {
+          alert("Delete Success");
+        });
+
+      const deletedPage = notionList.querySelector(
+        `a[id='${pageId.textContent}']`
+      );
+      if (deletedPage) deletedPage.parentElement.remove();
+
+      fetch("http://localhost:3000/posts")
+        .then((res) => res.json())
+        .then((pages) => {
+          if (pages.length) {
+            setContents(pages[0]);
+          } else {
+            pageId.textContent = "";
+            contentTitle.textContent = "새 페이지";
+            contentContainer.innerHTML = "";
+          }
+        })
+        .catch((error) => alert(error.message));
+    }
+  });
+
+  todoCreateBtn.addEventListener("click", (e) => {
+    fetch("http://localhost:3000/todos", {
+      method: "POST",
+      body: JSON.stringify({ todo: "", completed: false }),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        makeTodoList(json);
+      });
+  });
+
+  const getTodoList = () => {
+    fetch("http://localhost:3000/todos")
+      .then((response) => response.json())
+      .then((json) => {
+        json.forEach(makeTodoList);
+      });
+  };
+  getTodoList();
+
+  const makeTodoList = (data) => {
+    const li = document.createElement("li");
+    const i = document.createElement("i");
+    const span = document.createElement("span");
+
+    li.className = "todoList-item";
+    i.className = data.completed
+      ? "fa-regular fa-square-check"
+      : "fa-regular fa-square";
+    li.id = data.id;
+    span.className = "todo-text";
+    span.textContent = data.todo || "New Todo";
+    span.contentEditable = "true";
+
+    i.addEventListener("click", () => {
+      toggleTodo(data.id, !data.completed, i, span);
+    });
+
+    span.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        span.blur();
+      }
+    });
+
+    span.addEventListener("blur", () => {
+      updateTodoText(data.id, span.textContent);
+    });
+
+    li.appendChild(i);
+    li.appendChild(span);
+    todoList.appendChild(li);
+  };
+
+  const toggleTodo = (id, newCompleted, i, span) => {
+    fetch(`http://localhost:3000/todos/${id}`)
+      .then((res) => res.json())
+      .then((todo) => {
+        fetch(`http://localhost:3000/todos/${id}`, {
+          method: "PUT",
+          body: JSON.stringify({
+            todo: todo.todo,
+            completed: newCompleted,
+          }),
+          headers: { "Content-type": "application/json; charset=UTF-8" },
+        })
+          .then((res) => res.json())
+          .then(() => {
+            i.className = newCompleted
+              ? "fa-regular fa-square-check"
+              : "fa-regular fa-square";
+          });
+      });
+  };
+
+  const updateTodoText = (id, newText) => {
+    fetch(`http://localhost:3000/todos/${id}`)
+      .then((res) => res.json())
+      .then((todo) => {
+        fetch(`http://localhost:3000/todos/${id}`, {
+          method: "PUT",
+          body: JSON.stringify({
+            todo: newText,
+            completed: todo.completed,
+          }),
+          headers: { "Content-type": "application/json; charset=UTF-8" },
+        });
+      });
   };
 });

@@ -1,29 +1,26 @@
 {
   "posts": [
     {
-      "title": "djssud",
-      "body": "hi \nfw",
-      "id": "be92"
+      "id": "4ce7",
+      "title": "",
+      "body": ""
     },
     {
-      "id": "1247",
+      "id": "6cfe",
       "title": "",
       "body": ""
     }
   ],
-  "comments": [
+  "todos": [
     {
-      "id": "1",
-      "text": "a comment about post 1",
-      "postId": "1"
+      "todo": "New",
+      "completed": false,
+      "id": "0cfc"
     },
     {
-      "id": "2",
-      "text": "another comment about post 1",
-      "postId": "1"
+      "todo": "Hi",
+      "completed": true,
+      "id": "8a6e"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
