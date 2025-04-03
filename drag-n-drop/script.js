@@ -1,40 +1,30 @@
-const fill = document.querySelector ('.icon-fill')
-const icons = document.querySelectorAll('.icon')
-const body = document.body
+document.addEventListener("DOMContentLoaded", () => {
+  const list = document.querySelector(".list");
 
-body.addEventListener('dragstart', dragStart)
-body.addEventListener('dragend', dragEnd)
+  let currentItemIdx = null;
+  let currentItem = null;
 
-for(const icon of icons){
-    icon.addEventListener('dragover',dragOver);
-    icon.addEventListener('dragenter',dragEnter);
-    icon.addEventListener('dragleave',dragLeave);
-    icon.addEventListener('drop',dragDrop);
+  list.addEventListener("dragstart", (e) => {
+    currentItem = e.target;
+    const listArr = [...currentItem.parentElement.children];
+    currentItemIdx = listArr.indexOf(currentItem);
+  });
 
-    function dragStart(e){
-        if(!e.target.classList.contains('icon-fill')){
-            e.preventDefault()
-            return
-        }
-        fill.className += ' hold'
-        setTimeout(()=>fill.className = 'invisible',0)
-    }
+  list.addEventListener("dragover", (e) => {
+    e.preventDefault();
+  });
 
-    function dragEnd(){
-        fill.className = 'icon-fill'
+  list.addEventListener("drop", (e) => {
+    e.preventDefault();
+
+    const currentDropItem = e.target;
+    const listArr = [...currentItem.parentElement.children];
+    const dropItemIndex = listArr.indexOf(currentDropItem);
+
+    if (currentItemIdx < dropItemIndex) {
+      currentDropItem.after(currentItem);
+    } else {
+      currentDropItem.before(currentItem);
     }
-    function dragOver(e){
-        e.preventDefault()
-    }
-    function dragEnter(e){
-        e.preventDefault()
-        this.className += ' hovered'
-    }
-    function dragLeave(){
-        this.className = 'icon'
-    }
-    function dragDrop(){
-        this.className = 'icon'
-        this.append(fill)
-    }
-}
+  });
+});
